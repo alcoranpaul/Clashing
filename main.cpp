@@ -28,7 +28,6 @@ int main()
         Prop{Vector2{400.f, 500.f}, LoadTexture("nature_tileset/Log.png")}};
 
     // Enemy
-
     Enemy goblin{
         Vector2{300.f, 500.f},
         LoadTexture("characters/goblin_idle_spritesheet.png"),
@@ -62,6 +61,8 @@ int main()
         &slime,
         &slime2,
         &slime3};
+    // Number of Enemies
+    int numEnemies = sizeof(enemies) / sizeof(enemies[0]);
 
     for (auto enemy : enemies)
     {
@@ -83,7 +84,14 @@ int main()
             prop.Render(knight.getWorldPos());
         }
 
-        if (!knight.getAlive())
+        // Win condition
+        if (numEnemies == 0)
+        {
+            DrawText("You Win!", 55.f, 45.f, 60, RED);
+            EndDrawing();
+            continue;
+        }
+        else if (!knight.getAlive())
         {
             DrawText("Game OVER!", 55.f, 45.f, 40, RED);
             EndDrawing();
@@ -96,6 +104,7 @@ int main()
             DrawText(knightsHealth.c_str(), 55.f, 45.f, 40, RED);
         }
 
+        // Knight
         knight.tick(GetFrameTime());
         // Check map bounds
         if (knight.getWorldPos().x < 0.0f ||
@@ -105,6 +114,8 @@ int main()
         {
             knight.undoMovement();
         }
+
+        // Props
         for (Prop prop : props)
         {
             if (CheckCollisionRecs(prop.getCollisionRec(knight.getWorldPos()), knight.getCollisionRec()))
@@ -113,6 +124,7 @@ int main()
             }
         }
 
+        // Enemies
         for (auto enemy : enemies)
         {
             enemy->tick(GetFrameTime());
@@ -125,6 +137,7 @@ int main()
                 if (CheckCollisionRecs(enemy->getCollisionRec(), knight.getWeaponCollisionRec()))
                 {
                     enemy->setAlive(false);
+                    numEnemies--;
                 }
             }
         }
