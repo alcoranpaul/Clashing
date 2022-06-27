@@ -49,9 +49,11 @@ void BaseCharacter::tick(float deltaTime)
     Rectangle source{frame * width, 0.0f, x_direction * width, height};
     Rectangle dist{getScreenPos().x, getScreenPos().y, knightScale * width, knightScale * height};
     DrawTexturePro(texture, source, dist, Vector2{}, 0.0f, WHITE);
-    // DrawRectangleLines(getCollisionRec().x,
-    //                    getCollisionRec().y,
-    //                    getCollisionRec().width,
-    //                    getCollisionRec().height,
-    //                    RED);
+
+    // Debugging
+    //  DrawRectangleLines(getCollisionRec().x,
+    //                     getCollisionRec().y,
+    //                     getCollisionRec().width,
+    //                     getCollisionRec().height,
+    //                     RED);
 };
