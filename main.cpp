@@ -11,7 +11,7 @@ using namespace std;
 int main()
 {
     // Window details
-    const int windowDimensions = 1200;
+    const int windowDimensions = 384;
     InitWindow(windowDimensions, windowDimensions, "Clashing");
     SetTargetFPS(60);
 
@@ -28,8 +28,17 @@ int main()
         Prop{Vector2{400.f, 500.f}, LoadTexture("nature_tileset/Log.png")}};
 
     // Enemy
+
     Enemy goblin{
         Vector2{300.f, 500.f},
+        LoadTexture("characters/goblin_idle_spritesheet.png"),
+        LoadTexture("characters/goblin_run_spritesheet.png")};
+    Enemy goblin2{
+        Vector2{500.f, 850.f},
+        LoadTexture("characters/goblin_idle_spritesheet.png"),
+        LoadTexture("characters/goblin_run_spritesheet.png")};
+    Enemy goblin3{
+        Vector2{600.f, 1200.f},
         LoadTexture("characters/goblin_idle_spritesheet.png"),
         LoadTexture("characters/goblin_run_spritesheet.png")};
 
@@ -37,10 +46,22 @@ int main()
         Vector2{500.f, 700.f},
         LoadTexture("characters/slime_idle_spritesheet.png"),
         LoadTexture("characters/slime_run_spritesheet.png")};
+    Enemy slime2{
+        Vector2{790.f, 900.f},
+        LoadTexture("characters/slime_idle_spritesheet.png"),
+        LoadTexture("characters/slime_run_spritesheet.png")};
+    Enemy slime3{
+        Vector2{1000.f, 860.f},
+        LoadTexture("characters/slime_idle_spritesheet.png"),
+        LoadTexture("characters/slime_run_spritesheet.png")};
 
     Enemy *enemies[]{
         &goblin,
-        &slime};
+        &goblin2,
+        &goblin3,
+        &slime,
+        &slime2,
+        &slime3};
 
     for (auto enemy : enemies)
     {
